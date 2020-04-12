@@ -30,7 +30,7 @@ class Moderation(commands.Cog):
 
     @commands.has_permissions(ban_members=True)
     @commands.command()
-    async def unban(self, ctx, *member):
+    async def unban(self, ctx, *member : str):
         banned_users = await ctx.guild.bans()
         member_name, member_discriminator = member.split('#')
 

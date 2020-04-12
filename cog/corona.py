@@ -70,6 +70,7 @@ class Corona(commands.Cog):
             hp = HTMLTableParser()
             table = hp.parse_url(url)[0][1]
             t= table.loc[table[0] == country.upper()] 
+            
             if len(t) > 0:
                 
                 embed=discord.Embed(title="Corona Virus", description=country.upper(), color=0xbde12b)
@@ -83,11 +84,9 @@ class Corona(commands.Cog):
 
                 recovered = re.split(pattern,t[5].to_string())[4]
 
-                embed.add_field(name="Current cases", value=cases, inline=True)
-                embed.add_field(name="Today's cases", value=new_cases, inline=True)
-                embed.add_field(name="Recovered", value=recovered, inline=False)
-                embed.add_field(name="Current deaths", value=deaths, inline=True)
-                embed.add_field(name="Today's deaths", value=new_deaths, inline=True)
+                embed.add_field(name="Current cases", value=f"{cases} {new_cases}", inline=True)
+                embed.add_field(name="Recovered", value=recovered, inline=True)
+                embed.add_field(name="Current deaths", value=f"{deaths} {new_deaths}", inline=True)
                 embed.set_footer(text="Rimuru")
 
                 await ctx.send(embed=embed)

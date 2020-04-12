@@ -37,21 +37,11 @@ class Fun(commands.Cog):
         await asyncio.sleep(3)
         return r
 
-
-    @commands.command()
-    async def corona(self, ctx, *, country):
-        r = await self.fetch_data('https://www.worldometers.info/coronavirus/')
-        if r is not None:
-            soup = BeautifulSoup(r.text, 'html.parser')
-            table = soup.find(id="main_table_countries_today")
-            child = list(table.children)[3]
-            print(child)
-    
-
-    
-
-
-
+    @commands.command(name="avatar")
+    async def get_avatar(self, ctx, user : discord.Member, size = 512):
+        embed = discord.Embed(title=f"{user.name}'s Avatar", colour = discord.Colour.blue())
+        embed.set_image(url=user.avatar_url_as(format="png", size=size))
+        await ctx.send(embed=embed)
 
 def setup(client):
     client.add_cog(Fun(client))
